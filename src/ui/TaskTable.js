@@ -72,8 +72,13 @@ class TaskTable extends Component {
 		if (this.props.filteredTasks) {
 			switch (this.props.filteredTasks.type) {
 				case 'id':
-					return this.props.fetchedTasks.filter(item => {
-						return item.id.toLowerCase().indexOf(this.props.filteredTasks.text.toLowerCase()) > -1;
+					return this.props.filteredTasks.text.map(item => {
+						for (let i = 0; i < this.props.fetchedTasks.length; i++) {
+							if (this.props.fetchedTasks[i].id.toLowerCase().indexOf(item.toLowerCase()) > -1) {
+								return this.props.fetchedTasks[i];
+							}
+						}
+						return null;
 					});
 				case 'title':
 					return this.props.fetchedTasks.filter(item => {

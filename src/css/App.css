@@ -53,6 +53,11 @@ html {
 	width: 300px;
 }
 
+.warning_message:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 .warning_list {
 	padding-left: 0;
 }

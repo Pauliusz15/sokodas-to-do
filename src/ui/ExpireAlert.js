@@ -10,6 +10,7 @@ class ExpireAlert extends Component {
 		super(props);
 
 		this.handleItemClick = this.handleItemClick.bind(this);
+		this.handleMessageClick = this.handleMessageClick.bind(this);
 	}
 
 	getItems() {
@@ -23,7 +24,21 @@ class ExpireAlert extends Component {
 		const data = this.props.fetchedTasks.find(item => {
 			return item.id === id;
 		});
-		this.props.loadTableFilter(data.id, 'id');
+		this.props.loadTableFilter([data.id], 'id');
+	}
+
+	handleMessageClick() {
+		const data = this.getItems().filter(item => {
+			return this.props.fetchedTasks.filter(fItem => {
+				return fItem.id === item.id;
+			});
+		});
+		this.props.loadTableFilter(
+			data.map(item => {
+				return item.id;
+			}),
+			'id'
+		);
 	}
 
 	createList() {
@@ -41,17 +56,17 @@ class ExpireAlert extends Component {
 	}
 
 	render() {
+		const message = (
+			<span className="warning_message" onClick={this.handleMessageClick}>
+				Tasks behind schedule:
+			</span>
+		);
 		const list = this.createList();
+
 		if (this.getItems().length > 0) {
 			return (
 				<div className="expire_alert">
-					<Alert
-						message="Tasks behind schedule:"
-						description={list}
-						type="warning"
-						showIcon
-						closable="true"
-					/>
+					<Alert message={message} description={list} type="warning" showIcon closable="true" />
 				</div>
 			);
 		} else {
