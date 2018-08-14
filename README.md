@@ -1,11 +1,11 @@
-## Installation
-1. `npm install`
+## Install
 
-## Usage
-**General**
+    $ npm install
 
-`npm start`
+## Start & watch
 
-* Compiles the app
-* Starts a web server hosting the app @ `http://localhost:3000`
-* Watches for changes and injects them using hot module replacement (without reloading the browser)
+    $ npm start
+
+## Simple build for production
+
+    $ npm run build
