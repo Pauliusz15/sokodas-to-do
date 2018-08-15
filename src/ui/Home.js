@@ -29,7 +29,7 @@ class Home extends Component {
 				<div className="header_container">
 					<h1 className="main_header">Tasks</h1>
 					<Button
-						className="green add_btn"
+						className="add_btn"
 						type="primary"
 						icon="plus-circle-o"
 						onClick={() => this.props.setAddTaskVisibility(true)}
@@ -37,7 +37,7 @@ class Home extends Component {
 						Add task
 					</Button>
 					<Button
-						className="green add_btn"
+						className="add_btn"
 						type="primary"
 						icon="plus-circle-o"
 						onClick={() => this.props.setAddClientVisibility(true)}

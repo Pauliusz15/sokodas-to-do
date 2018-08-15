@@ -62,26 +62,6 @@ html {
 	padding-left: 0;
 }
 
-.green {
-	background-color: #73d13d;
-	border-color: #73d13d;
-}
-
-.green:hover {
-	background-color: #95de64;
-	border-color: #73d13d;
-}
-
-.green:focus {
-	background-color: #95de64;
-	border-color: #73d13d;
-}
-
-.green:active {
-	background-color: #54ab29;
-	border-color: #73d13d;
-}
-
 .color_active {
 	background-color: #bae7ff;
 }
