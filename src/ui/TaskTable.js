@@ -98,7 +98,7 @@ class TaskTable extends Component {
 				case 'clear':
 					return this.props.fetchedTasks;
 				default:
-					return null;
+					return [];
 			}
 		} else {
 			return this.props.fetchedTasks;

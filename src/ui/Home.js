@@ -14,13 +14,26 @@ import {
 	setAddClientVisibility,
 	setAddTaskVisibility
 } from '../actions/modal-visibility';
-import { fetchClients } from '../actions/fetch';
+import { fetchClients, fetchTasks } from '../actions/fetch';
+import { loadTableFilter } from '../actions/table-data';
 import { Button } from 'antd';
 import '../css/App.css';
 
 class Home extends Component {
+	constructor(props) {
+		super(props);
+
+		this.handleReloadClick = this.handleReloadClick.bind(this);
+	}
+
 	componentDidMount() {
 		this.props.fetchClients();
+	}
+
+	handleReloadClick() {
+		this.props.fetchTasks();
+		this.props.fetchClients();
+		this.props.loadTableFilter('', 'title');
 	}
 
 	render() {
@@ -31,7 +44,7 @@ class Home extends Component {
 					<Button
 						className="add_btn"
 						type="primary"
-						icon="plus-circle-o"
+						icon="plus"
 						onClick={() => this.props.setAddTaskVisibility(true)}
 					>
 						Add task
@@ -39,7 +52,7 @@ class Home extends Component {
 					<Button
 						className="add_btn"
 						type="primary"
-						icon="plus-circle-o"
+						icon="plus"
 						onClick={() => this.props.setAddClientVisibility(true)}
 					>
 						Add client
@@ -50,6 +63,9 @@ class Home extends Component {
 						onClick={() => this.props.setClientsVisibility(true)}
 					>
 						View clients
+					</Button>
+					<Button className="add_btn" type="primary" icon="reload" onClick={this.handleReloadClick}>
+						Reload
 					</Button>
 				</div>
 				<AddTask />
@@ -66,8 +82,7 @@ class Home extends Component {
 
 function mapStateToProps(state) {
 	return {
-		loadedTask: state.loadedTask,
-		editTaskVisibility: state.editTaskVisibility
+		filteredTasks: state.filteredTasks
 	};
 }
 
@@ -77,7 +92,9 @@ function matchDispatchToProps(dispatch) {
 			setAddTaskVisibility: setAddTaskVisibility,
 			fetchClients: fetchClients,
 			setAddClientVisibility: setAddClientVisibility,
-			setClientsVisibility: setClientsVisibility
+			setClientsVisibility: setClientsVisibility,
+			loadTableFilter: loadTableFilter,
+			fetchTasks: fetchTasks
 		},
 		dispatch
 	);
