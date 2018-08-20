@@ -149,7 +149,7 @@ class TaskTable extends Component {
 
 		return (
 			<div className="task_table_container">
-				<Table bordered={true} pagination={false} dataSource={tableData} expandRowByClick={true}>
+				<Table bordered={true} dataSource={tableData} expandRowByClick={true}>
 					<Column
 						title="Title"
 						dataIndex="title"

@@ -11,6 +11,10 @@ class DraftEditorAdd extends Component {
 		this.onChange = this.onChange.bind(this);
 	}
 
+	componentDidMount() {
+		this.props.setDescriptionAddInput(RichTextEditor.createValueFromString('', 'html'));
+	}
+
 	onChange(value) {
 		this.props.setDescriptionAddInput(value);
 	}
