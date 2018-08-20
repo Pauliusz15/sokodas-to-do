@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { loadTableFilter } from '../actions/table-data';
+import { editTask } from '../actions/edit';
 import { Alert } from 'antd';
 
 class ExpireAlert extends Component {
@@ -11,12 +12,12 @@ class ExpireAlert extends Component {
 
 		this.handleItemClick = this.handleItemClick.bind(this);
 		this.handleMessageClick = this.handleMessageClick.bind(this);
+		this.handleClose = this.handleClose.bind(this);
 	}
 
 	getItems() {
-		const currDate = getCurrentDate();
 		return this.props.fetchedTasks.filter(item => {
-			return currDate > item.date && item.progress !== 'Completed';
+			return item.show_expired !== '0';
 		});
 	}
 
@@ -39,6 +40,23 @@ class ExpireAlert extends Component {
 			}),
 			'id'
 		);
+	}
+
+	handleClose() {
+		for (let i = 0; i < this.getItems().length; i++) {
+			const item = this.getItems()[i];
+			this.props.editTask(
+				item.id,
+				item.client_id,
+				item.name,
+				item.description,
+				item.date,
+				item.price,
+				item.currency,
+				item.progress,
+				0
+			);
+		}
 	}
 
 	createList() {
@@ -66,7 +84,14 @@ class ExpireAlert extends Component {
 		if (this.getItems().length > 0) {
 			return (
 				<div className="expire_alert">
-					<Alert message={message} description={list} type="warning" showIcon closable="true" />
+					<Alert
+						message={message}
+						description={list}
+						type="warning"
+						showIcon
+						closable="true"
+						onClose={this.handleClose}
+					/>
 				</div>
 			);
 		} else {
@@ -75,30 +100,12 @@ class ExpireAlert extends Component {
 	}
 }
 
-const addZero = i => {
-	if (i < 10) {
-		i = '0' + i;
-	}
-	return i;
-};
-
-const getCurrentDate = () => {
-	const today = new Date();
-	let mins = addZero(today.getMinutes());
-	let hours = addZero(today.getHours());
-	let dd = addZero(today.getDate());
-	let mm = addZero(today.getMonth() + 1);
-	let yyyy = addZero(today.getFullYear());
-
-	return yyyy + '-' + mm + '-' + dd + ' ' + hours + ':' + mins;
-};
-
 function mapStateToProps(state) {
 	return { fetchedTasks: state.fetchedTasks };
 }
 
 function matchDispatchToProps(dispatch) {
-	return bindActionCreators({ loadTableFilter: loadTableFilter }, dispatch);
+	return bindActionCreators({ loadTableFilter: loadTableFilter, editTask: editTask }, dispatch);
 }
 
 export default connect(

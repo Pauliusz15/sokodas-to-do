@@ -1,4 +1,14 @@
-export const editTask = (id, clientId, name, desc, date, price, currency, progress) => {
+export const editTask = (
+	id,
+	clientId,
+	name,
+	desc,
+	date,
+	price,
+	currency,
+	progress,
+	showExpired
+) => {
 	if (desc === '' || desc === '<p><br></p>') {
 		desc = '-';
 	}
@@ -16,7 +26,8 @@ export const editTask = (id, clientId, name, desc, date, price, currency, progre
 				date: date,
 				price: price,
 				currency: currency,
-				progress: progress
+				progress: progress,
+				show_expired: showExpired
 			})
 		})
 			.then(request => {

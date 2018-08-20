@@ -1,4 +1,4 @@
-export const postTask = (clientId, name, desc, date, price, currency, progress) => {
+export const postTask = (clientId, name, desc, date, price, currency, progress, showExpired) => {
 	if (desc === '' || desc === '<p><br></p>') {
 		desc = '-';
 	}
@@ -15,7 +15,8 @@ export const postTask = (clientId, name, desc, date, price, currency, progress) 
 				date: date,
 				price: price,
 				currency: currency,
-				progress: progress
+				progress: progress,
+				show_expired: showExpired
 			})
 		})
 			.then(request => {

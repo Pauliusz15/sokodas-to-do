@@ -13,6 +13,11 @@ class DraftEditorEdit extends Component {
 		};
 		this.onChange = this.onChange.bind(this);
 	}
+
+	componentDidMount() {
+		this.props.setDescriptionEditInput(this.state.value);
+	}
+
 	onChange(value) {
 		this.setState({ value: value });
 		this.props.setDescriptionEditInput(value);

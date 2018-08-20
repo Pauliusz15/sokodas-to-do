@@ -18,7 +18,7 @@ class AddTask extends Component {
 			titleInput: '',
 			dateInput: '',
 			timeInput: '',
-			progressInput: '',
+			progressInput: 'Active',
 			titleInputError: false,
 			currency: '€',
 			clientInputError: false
@@ -107,6 +107,14 @@ class AddTask extends Component {
 		this.props.setDescriptionAddInput(null);
 	}
 
+	showExpired() {
+		if (this.state.progressInput !== 'Completed') {
+			if (getCurrentDate() > this.state.dateInput + ' ' + this.state.timeInput) return 1;
+		} else {
+			return 0;
+		}
+	}
+
 	handleOk() {
 		if (this.state.titleInput === '') {
 			this.setState({ titleInputError: true });
@@ -122,7 +130,8 @@ class AddTask extends Component {
 				this.state.dateInput + ' ' + this.state.timeInput,
 				this.state.priceInput,
 				this.state.currency,
-				this.state.progressInput
+				this.state.progressInput,
+				this.showExpired()
 			);
 			this.setState({
 				titleInput: '',
@@ -228,6 +237,24 @@ class AddTask extends Component {
 		);
 	}
 }
+
+const addZero = i => {
+	if (i < 10) {
+		i = '0' + i;
+	}
+	return i;
+};
+
+const getCurrentDate = () => {
+	const today = new Date();
+	let mins = addZero(today.getMinutes());
+	let hours = addZero(today.getHours());
+	let dd = addZero(today.getDate());
+	let mm = addZero(today.getMonth() + 1);
+	let yyyy = addZero(today.getFullYear());
+
+	return yyyy + '-' + mm + '-' + dd + ' ' + hours + ':' + mins;
+};
 
 function mapStateToProps(state) {
 	return {

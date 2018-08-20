@@ -109,10 +109,24 @@ class EditTask extends Component {
 		this.props.setDescriptionEditInput(null);
 	}
 
+	showExpired() {
+		let prog = this.state.progressInput ? this.state.progressInput : this.props.loadedTask.progress;
+		if (prog !== 'Completed') {
+			if (
+				getCurrentDate() >
+				checkDateTime(this.state.dateInput, this.state.timeInput, this.props.loadedTask.date)
+			)
+				return 1;
+		} else {
+			return 0;
+		}
+	}
+
 	handleOk() {
 		if (this.state.titleInput === '') {
 			this.setState({ titleInputError: true });
 		}
+
 		if (this.state.titleInput !== '') {
 			this.props.editTask(
 				this.props.loadedTask.id,
@@ -123,8 +137,9 @@ class EditTask extends Component {
 				this.state.priceInput
 					? this.state.priceInput
 					: this.props.loadedTask.price + this.state.currency,
-				this.state.currency ? this.state.currency : '€',
-				this.state.progressInput ? this.state.progressInput : this.props.loadedTask.progress
+				this.state.currency ? this.state.currency : this.props.loadedTask.currency,
+				this.state.progressInput ? this.state.progressInput : this.props.loadedTask.progress,
+				this.showExpired()
 			);
 			this.setState({
 				titleInput: null,
@@ -277,13 +292,31 @@ class EditTask extends Component {
 	}
 }
 
+const addZero = i => {
+	if (i < 10) {
+		i = '0' + i;
+	}
+	return i;
+};
+
+const getCurrentDate = () => {
+	const today = new Date();
+	let mins = addZero(today.getMinutes());
+	let hours = addZero(today.getHours());
+	let dd = addZero(today.getDate());
+	let mm = addZero(today.getMonth() + 1);
+	let yyyy = addZero(today.getFullYear());
+
+	return yyyy + '-' + mm + '-' + dd + ' ' + hours + ':' + mins;
+};
+
 const checkDateTime = (dateState, timeState, reduxDate) => {
 	if (!dateState && timeState) {
 		return reduxDate.substring(0, reduxDate.length - 5) + timeState;
 	} else if (dateState && !timeState) {
-		return dateState + ' ' + reduxDate.substring(10);
+		return dateState + reduxDate.substring(10);
 	} else if (dateState && timeState) {
-		return dateState + ' ' + timeState;
+		return dateState + timeState;
 	} else {
 		return reduxDate;
 	}
