@@ -1,79 +1,68 @@
 html {
-	overflow-y: scroll;
-}
-
-.main_header {
-	text-align: center;
-	vertical-align: middle;
-	margin-top: 8px;
+  overflow-y: scroll;
 }
 
 .inline_block {
-	display: inline-block;
+  display: inline-block;
 }
 
 .task_table_container {
-	margin: auto;
-	width: 90%;
-	vertical-align: top;
-	text-align: center;
-	align: center;
+  margin: 20px;
 }
 
 .custom_filter_dropdown {
-	padding: 8px;
-	border-radius: 6px;
-	background: #fff;
-	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
 }
 
 .custom_filter_dropdown input {
-	width: 130px;
-	margin-right: 8px;
+  width: 130px;
+  margin-right: 8px;
 }
 
 .header_container {
-	text-align: center;
-	padding: 20px;
+  text-align: center;
 }
 
-.add_btn {
-	vertical-align: middle;
-	margin-left: 10px;
+.btn {
+  margin: 10px;
+  width: 110px;
 }
 
 .search_btn {
-	margin-right: 5px;
+  margin-right: 5px;
 }
 
 .expire_alert {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	width: 300px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 300px;
 }
 
 .warning_message:hover {
-	text-decoration: underline;
-	cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .warning_list {
-	padding-left: 0;
+  padding-left: 0;
 }
 
 .color_active {
-	background-color: #bae7ff;
+  background-color: #bae7ff;
 }
 
 .color_completed {
-	background-color: #d9f7be;
+  background-color: #d9f7be;
 }
 
 .color_canceled {
-	background-color: #ffccc7;
+  background-color: #ffccc7;
 }
 
 .color_on_hold {
-	background-color: #ffe7ba;
+  background-color: #ffe7ba;
 }
