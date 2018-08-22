@@ -127,10 +127,10 @@ class AddTask extends Component {
 				this.state.clientInput,
 				this.state.titleInput,
 				this.props.descriptionAddInput.toString('html'),
-				this.state.dateInput + ' ' + this.state.timeInput,
+				this.state.dateInput ? this.state.dateInput + ' ' + this.state.timeInput : getCurrentDate(),
 				this.state.priceInput,
 				this.state.currency,
-				this.state.progressInput,
+				this.state.progressInput ? this.state.progressInput : 'Active',
 				this.showExpired()
 			);
 			this.setState({
