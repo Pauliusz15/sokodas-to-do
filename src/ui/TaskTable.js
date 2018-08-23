@@ -164,6 +164,7 @@ class TaskTable extends Component {
           dataSource={tableData}
           expandRowByClick={true}
           scroll={{ x: 1000 }}
+          pagination={{ position: "both" }}
           loading={this.props.isLoading}
         >
           <Column
