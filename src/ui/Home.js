@@ -14,7 +14,6 @@ import {
   setAddClientVisibility,
   setAddTaskVisibility
 } from "../actions/modal-visibility";
-import { changeLoadingState } from "../actions/loader";
 import { fetchClients, fetchTasks } from "../actions/fetch";
 import { loadTableFilter } from "../actions/table-data";
 import { Menu, Icon } from "antd";
@@ -32,7 +31,6 @@ class Home extends Component {
   }
 
   handleReloadClick() {
-    this.props.changeLoadingState(true);
     this.props.fetchTasks();
     this.props.fetchClients();
     this.props.loadTableFilter("", "title");
@@ -81,8 +79,7 @@ function matchDispatchToProps(dispatch) {
       setAddClientVisibility: setAddClientVisibility,
       setClientsVisibility: setClientsVisibility,
       loadTableFilter: loadTableFilter,
-      fetchTasks: fetchTasks,
-      changeLoadingState: changeLoadingState
+      fetchTasks: fetchTasks
     },
     dispatch
   );

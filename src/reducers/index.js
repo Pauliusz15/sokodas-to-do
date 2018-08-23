@@ -14,7 +14,6 @@ import clientInfoVisibility from "./client-info-visibility";
 import loadedClient from "./loaded-client";
 import clientEditVisibility from "./client-edit-visibility";
 import filteredTasks from "./filtered-tasks";
-import isLoading from "./is-loading";
 
 const allReducers = combineReducers({
   fetchedTasks: fetchedTasks,
@@ -30,8 +29,7 @@ const allReducers = combineReducers({
   clientInfoVisibility: clientInfoVisibility,
   loadedClient: loadedClient,
   clientEditVisibility: clientEditVisibility,
-  filteredTasks: filteredTasks,
-  isLoading: isLoading
+  filteredTasks: filteredTasks
 });
 
 export default allReducers;

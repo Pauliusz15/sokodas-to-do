@@ -1,4 +1,4 @@
-import { baseUrl } from "./base_url";
+import { baseUrl } from "../constants/baseUrl";
 
 export const postTask = (
   clientId,

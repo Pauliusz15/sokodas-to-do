@@ -1,4 +1,4 @@
-import { baseUrl } from "./base_url";
+import { baseUrl } from "../constants/baseUrl";
 
 export const deleteTask = id => {
   return function(dispatch) {
@@ -12,7 +12,7 @@ export const deleteTask = id => {
       })
     })
       .then(request => {
-        fetch("http://localhost/get_tasks.php")
+        fetch(baseUrl + "get_tasks.php")
           .then(res => res.json())
           .then(data => dispatch({ type: "FETCH_TASKS", payload: data }));
       })

@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 
 import { fetchTasks } from "../actions/fetch";
 import { loadTask } from "../actions/load";
-import { changeLoadingState } from "../actions/loader";
 import {
   setEditTaskVisibility,
   setTaskInfoState
@@ -153,10 +152,6 @@ class TaskTable extends Component {
   render() {
     let tableData = this.convertToTableData(this.checkFilterType());
 
-    tableData.length > 0
-      ? this.props.changeLoadingState(false)
-      : this.props.changeLoadingState(true);
-
     return (
       <div className="task_table_container">
         <Table
@@ -165,7 +160,7 @@ class TaskTable extends Component {
           expandRowByClick={true}
           scroll={{ x: 1000 }}
           pagination={{ position: "both" }}
-          loading={this.props.isLoading}
+          loading={tableData.length > 0 ? false : true}
         >
           <Column
             title="Title"
@@ -360,8 +355,7 @@ function mapStateToProps(state) {
   return {
     fetchedTasks: state.fetchedTasks,
     fetchedClients: state.fetchedClients,
-    filteredTasks: state.filteredTasks,
-    isLoading: state.isLoading
+    filteredTasks: state.filteredTasks
   };
 }
 
@@ -373,8 +367,7 @@ function matchDispatchToProps(dispatch) {
       setTaskInfoState: setTaskInfoState,
       deleteTask: deleteTask,
       setEditTaskVisibility: setEditTaskVisibility,
-      loadTableFilter: loadTableFilter,
-      changeLoadingState: changeLoadingState
+      loadTableFilter: loadTableFilter
     },
     dispatch
   );
