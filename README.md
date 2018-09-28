@@ -1,3 +1,7 @@
+# Sokodas To-Do
+
+Just a To-Do app built with React and Redux, connected to PHP and MySQL server
+
 ## Install
 
     $ npm install
